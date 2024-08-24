@@ -14,7 +14,11 @@ void test_drive_motors1()
     const uint8_t data[] = {mflags, 125, 125};
     rrfw::RrOpStorage bytes = rrfw::RrOpStorage(RR_CMD_U1, 3, data);
 
-    TEST_ASSERT_EQUAL(1,1);
+    rrfw::RrOpStorage  res = l298.execute(bytes);
+    TEST_ASSERT_EQUAL(HIGH, digitalRead(M1_U1_IN1));
+    TEST_ASSERT_EQUAL(LOW,  digitalRead(M1_U1_IN2));
+    TEST_ASSERT_EQUAL(HIGH, digitalRead(M1_U1_IN3));
+    TEST_ASSERT_EQUAL(LOW,  digitalRead(M1_U1_IN4));
 }
 
 
