@@ -16,33 +16,20 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  * =====================================================================
  * 
- * Base class for Transmit, and Recieve. Handles Storage container, for
- * SimpleCollection.
+ * PIN Layout profile for Arduino UNO
  */
 
-#ifndef TXRX_BASE_HPP
-#define TXRX_BASE_HPP
+#ifndef PINLAYOUTARDUINOUNO_H
+#define PINLAYOUTARDUINOUNO_H
 
-#include <Arduino.h>
-#include <stdint.h>
-#include <RrFirmware.h>
-#include <RrOpStorage.hpp>
+#define M1_U1_ENA 2  // (Enable A) - pin  8 (L298N) 
+#define M1_U1_ENB 5  // (Enables B) - pin 14 (L298N) 
 
-namespace rrfw {
+#define M1_U1_IN1 4  // pin  7(L298N)
+#define M1_U1_IN2 3  // pin  9(L298N)
+#define M1_U1_IN3 7  // pin 13(L298N)
+#define M1_U1_IN4 6  // pin 15(L298N)
 
-
-
-    class RrOpBase {
-    public:
-        /*!
-         * by default returns success.
-         */
-        virtual const RrOpStorage execute(const RrOpStorage  bytes) 
-        { 
-            uint8_t data[]{};
-            return RrOpStorage(RR_IO_RES_OK, 0, data);
-        }
-    };
-}
+#define RR_IRQ_PIN  19
 
 #endif

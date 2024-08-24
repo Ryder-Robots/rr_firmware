@@ -15,22 +15,23 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  * =====================================================================
- * 
- *  Wiring for Arduino Uno,  will be included as a build flag for Arduino UNO
  */
 
-#ifndef ARDUINOUNOCONF_H
-#define ARDUINOUNOCONF_H
+#ifndef PINLAYOUT_H
+#define PINLAYOUT_H
 
+#include <Arduino.h>
 
+// Set which profile to use.
+#if(DPLATFORM == UNO)
 // Pin layout for motor driver A
-#define M1_U1_ENA 2  // (Enable A) - pin  8 (L298N) 
-#define M1_U1_ENB 5  // (Enables B) - pin 14 (L298N) 
+#include <PinLayoutArduinoUno.h>
 
-#define M1_U1_IN1 4  // pin  7(L298N)
-#define M1_U1_IN2 3  // pin  9(L298N)
-#define M1_U1_IN3 7  // pin 13(L298N)
-#define M1_U1_IN4 6  // pin 15(L298N)
+#endif
 
+// IRQ pin
+// When HIGH indicates that there is data on available from PI
+#define RR_IRQ_MODE RISING
+#define ISR_TIMEOUT 500
 
 #endif

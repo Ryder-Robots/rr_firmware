@@ -15,33 +15,38 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  * =====================================================================
+ *
+ * Code specific to the L298 motor driver.
  * 
- * Base class for Transmit, and Recieve. Handles Storage container, for
- * SimpleCollection.
+ * For analogRead values go from 0 to 1023, analogWrite values from 0 to 255
  */
 
-#ifndef TXRX_BASE_HPP
-#define TXRX_BASE_HPP
 
-#include <Arduino.h>
+#ifndef L298_HPP
+#define L298_HPP
+
 #include <stdint.h>
-#include <RrFirmware.h>
-#include <RrOpStorage.hpp>
+#include <RrOpBase.hpp>
 
 namespace rrfw {
-
-
-
-    class RrOpBase {
+    class L298 : public  RrOpBase {
     public:
-        /*!
-         * by default returns success.
-         */
-        virtual const RrOpStorage execute(const RrOpStorage  bytes) 
-        { 
-            uint8_t data[]{};
-            return RrOpStorage(RR_IO_RES_OK, 0, data);
-        }
+        const RrOpStorage execute(const RrOpStorage  bytes) override;
+
+        // Assign pins here.
+        L298(int ena, int enb, int in1, int in2, int in3, int in4);
+
+        ~L298();
+
+    private:
+        uint8_t toggle_bit(uint8_t flags, uint8_t test);
+
+        int _ena;
+        int _enb;
+        int _in1;
+        int _in2;
+        int _in3;
+        int _in4;
     };
 }
 
