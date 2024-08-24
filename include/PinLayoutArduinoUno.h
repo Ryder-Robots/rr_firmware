@@ -42,11 +42,4 @@
 // Uno should be supporting I2C but for some reason does not want to work.
 // Im sure this has worked before though.
 
-// For Testing use I2C bus, or console will not work.
-#if (BUSTYPE == I2C)
-#define BUS Wire
-#else
-#define BUS Serial
-#endif
-
 #endif

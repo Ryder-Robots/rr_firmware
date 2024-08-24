@@ -34,4 +34,12 @@
 #define RR_IRQ_MODE RISING
 #define ISR_TIMEOUT 500
 
+// For Testing use I2C bus, or console will not work.
+// TODO: Add initlization command for BUS here.
+#if (BUSTYPE == I2C)
+#define BUS Wire
+#else
+#define BUS Serial
+#endif
+
 #endif
