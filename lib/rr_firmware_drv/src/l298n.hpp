@@ -25,8 +25,11 @@
 #ifndef L298_HPP
 #define L298_HPP
 
+#include <Arduino.h>
 #include <stdint.h>
+#include <RrFirmware.h>
 #include <RrOpBase.hpp>
+#include <RrOpStorage.hpp>
 
 namespace rrfw {
     class L298 : public  RrOpBase {

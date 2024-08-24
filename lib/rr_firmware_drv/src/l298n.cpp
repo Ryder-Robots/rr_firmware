@@ -81,7 +81,7 @@ namespace rrfw {
     }
 
 
-    uint8_t L298::toggle_bit(byte flags, byte test)
+    uint8_t L298::toggle_bit(uint8_t flags, uint8_t test)
     {
         return ((flags &= test) == test) ? HIGH : LOW;
     }
