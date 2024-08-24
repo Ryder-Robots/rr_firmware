@@ -61,35 +61,4 @@ namespace rrfw {
         uint8_t data[] = {};
         return RrOpStorage(RR_IO_RES_UNSUPPORTED, 2, data);
     }
-
-    void isr()
-    {
-        for (int i = 0; i < ISR_TIMEOUT; i++)
-        {
-            if (BUS.available() > 0) {
-                String data = BUS.readString();
-                
-                if (data.length() < 2 ||  data.length() != (uint8_t) data.charAt(1)) {
-                    uint8_t ret[] = {RR_IO_RES_UNSUPPORTED, 0};
-                    BUS.write(ret, 2);
-                    return;
-                }
-                String rdata = data.substring(2);
-                RrOpStorage res = ctl_isr(RrOpStorage(
-                    (uint8_t) data.c_str()[0], 
-                    (uint8_t)data.c_str()[1], 
-                    (uint8_t *) rdata.c_str()));
-                BUS.write(res._cmd);
-                BUS.write(res._sz);
-                BUS.write(res._data, res._sz);
-            }
-
-            // break the loop,  there is no data.
-            if (i == ISR_TIMEOUT) {
-                uint8_t rv[] = {RR_IO_RES_TIMEOUT, 0};
-                BUS.write(rv, 2);
-                break;
-            }
-        }
-    }
 }

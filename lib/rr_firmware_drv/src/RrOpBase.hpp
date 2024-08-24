@@ -42,6 +42,8 @@ namespace rrfw {
             uint8_t data[]{};
             return RrOpStorage(RR_IO_RES_OK, 0, data);
         }
+
+        virtual ~RrOpBase() {}
     };
 }
 

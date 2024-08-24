@@ -50,12 +50,4 @@
 #define RR_MOTOR_FLAG_IN3 0b00000100  // Toggle IN3 HIGH
 #define RR_MOTOR_FLAG_IN4 0b00001000  // Toggle IN3 HIGH
 
-// For Testing use I2C bus, or console will not work.
-//#if (BUSTYPE == I2C)
-//#include <Wire.h>
-//#define BUS Wire
-//#else
-#define BUS Serial
-//#endif
-
 #endif
