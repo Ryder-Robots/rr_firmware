@@ -63,8 +63,12 @@ void isr()
 
 void setup() {
   // put your setup code here, to run once:;
+  rrfw::setup_isr();
+  // put in the begin BUS command,  this will need to be a macro. Serial.begin(9600);
+  //attachInterrupt(digitalPinToInterrupt(RR_IRQ_PIN), isr, RR_IRQ_MODE);
 }
 
 void loop() {
   // put your main code here, to run repeatedly:
+  // Check GPS every X amount of seconds.
 }
