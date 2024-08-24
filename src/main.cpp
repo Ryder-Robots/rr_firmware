@@ -46,9 +46,10 @@ void isr()
                 (uint8_t) data.c_str()[0], 
                 (uint8_t)data.c_str()[1], 
                 (uint8_t *) rdata.c_str()));
-            BUS.write(res._cmd);
-            BUS.write(res._sz);
-            BUS.write(res._data, res._sz);
+
+            // Concatinate the string to trigger block write.
+            String res_data = String(res._cmd) + String(res._sz) + String((char *)res._data);
+            BUS.write(res_data.c_str());
         }
 
         // break the loop,  there is no data.
