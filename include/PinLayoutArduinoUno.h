@@ -16,12 +16,17 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  * =====================================================================
  * 
- * PIN Layout profile for Arduino UNO
+ * Profile for Arduino UNO
  */
 
 #ifndef PINLAYOUTARDUINOUNO_H
 #define PINLAYOUTARDUINOUNO_H
 
+#include <l298n.hpp>
+
+// PIN Layout for supported devices.
+
+// Pin Layout for M1_U1 motor driver.
 #define M1_U1_ENA 2  // (Enable A) - pin  8 (L298N) 
 #define M1_U1_ENB 5  // (Enables B) - pin 14 (L298N) 
 
@@ -29,6 +34,8 @@
 #define M1_U1_IN2 3  // pin  9(L298N)
 #define M1_U1_IN3 7  // pin 13(L298N)
 #define M1_U1_IN4 6  // pin 15(L298N)
+
+#define M1_U1_CLASS new L298(M1_U1_ENA, M1_U1_ENB, M1_U1_IN1, M1_U1_IN2, M1_U1_IN3, M1_U1_IN4)
 
 #define RR_IRQ_PIN  19
 

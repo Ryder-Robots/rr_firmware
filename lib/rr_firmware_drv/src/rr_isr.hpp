@@ -1,4 +1,4 @@
-/*!
+/********************************************
  * Ryder Robots Shared Micro-Processor
  * Copyright (C) 2024  Ryder Robots
  *
@@ -16,30 +16,36 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  * =====================================================================
  * 
- * Base storage class for firmware operations,  this class attempts to emulate the I2C format
- * which is cmd, size, *data
+ * Consider this code the core structure of the micro-processor.
+ * 
+ * When the interrupt pin is triggerred, the MP will check USB for data
+ * get it deserilized, and perform some sort of task,  either 
+ * and operation or an action.
  */
 
-#ifndef RROPSTORAGE_HPP
-#define RROPSTORAGE_HPP
-#include <stdint.h>
 
+
+#ifndef RR_ISR_HPP
+#define RR_ISR_HPP
+
+#include <RrOpStorage.hpp>
+#include <RrFirmware.h>
+#include <RrOpBase.hpp>
+#include <PinLayout.h>
 
 namespace rrfw {
 
-    class RrOpStorage {
-        public:
-            RrOpStorage(const uint8_t cmd, const uint8_t sz, uint8_t *data):
-            _cmd{cmd},
-            _sz{sz}
-            {
-                _data = data;
-            }
+    void setup_isr();
 
-            uint8_t _cmd;
-            uint8_t _sz;
-            uint8_t *_data;
-    };
+    // function that will called when PIN is rising.
+    // interupt service routine. This function will take over the USB bus, therefore it
+    // can't be unit tested.
+    void isr();
+
+    // This functino is called by isr(), and designed specifically for unit testing.
+    const  RrOpStorage  ctl_isr(const RrOpStorage bytes);
+
+    void tear_down_isr();
+
 }
-
 #endif

@@ -19,6 +19,9 @@ void test_drive_motors1()
     TEST_ASSERT_EQUAL(LOW,  digitalRead(M1_U1_IN2));
     TEST_ASSERT_EQUAL(HIGH, digitalRead(M1_U1_IN3));
     TEST_ASSERT_EQUAL(LOW,  digitalRead(M1_U1_IN4));
+
+    TEST_ASSERT_EQUAL(RR_IO_RES_ACTION_SENT, res._cmd);
+    TEST_ASSERT_EQUAL(0, res._sz);
 }
 
 
