@@ -39,7 +39,7 @@
 
 #define RR_IRQ_PIN  19
 
-// Uno should be supporting I2C but for some reason does not want to work.
-// Im sure this has worked before though.
+// Suppoerted functions
+#define extern const uint8_t[] SUPPORTED_CMD = {}  
 
 #endif

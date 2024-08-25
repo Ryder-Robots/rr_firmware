@@ -30,18 +30,24 @@
 /*************************************************************
  * Commands
  *************************************************************/
-#define RR_CMD_U1    0x00  /* Motor A */
-#define RR_CMD_U2    0x01  /* MOtor B */
+enum RR_CMD : uint8_t {
+    // Actions
+    RR_CMD_U1            =0x00,  /* command for Motor Driver A */
+    RR_CMD_U2            =0x01,  /* command for Motor Driver B */
+
+    // Response codes.
+    RR_IO_RES_OK         =0x02,  /* successfully processed result, with return response */
+    RR_IO_RES_TIMEOUT    =0x03,  /* timed out while waiting to recieve data */
+    RR_IO_RES_ACTION_SENT=0x04,  /* Action was sent */
+    RR_IO_RES_UNSUPPORTED=0x05,  /* An unsupported operation.*/
+    RR_IO_RES_BAD_RQ     =0x06   /* Bad request was recieved */
+};
+
 
 // CAVEAT MUST BE LAST FUNCTION
 #define RR_IO_SZ RR_CMD_U2
 
-// Responses
-#define RR_IO_RES_OK          0x00  /* Action was sent */
-#define RR_IO_RES_TIMEOUT     0x01  /* Recieved request but no bytes to read */
-#define RR_IO_RES_ACTION_SENT 0x02  /* Sent action to handler */
-#define RR_IO_RES_UNSUPPORTED 0x03  /* An unsupported operation.*/
-#define RR_IO_RES_BAD_RQ      0x04  /* Bad request was recieved */
+
 
 // Arguments for motors
 // Constants specifc to MC1
