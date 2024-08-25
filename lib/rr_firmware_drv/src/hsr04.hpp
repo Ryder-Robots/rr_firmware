@@ -15,34 +15,31 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  * =====================================================================
+ *
+ * Code for HSR04 ultrasonic sensor or compatible model.  Supports
+ * GPIO pins for communication,  note that it uses one wire for RX/TX
  */
 
-#ifndef PINLAYOUT_H
-#define PINLAYOUT_H
+#ifndef HSR04_H
+#define HSR04_H
 
-#include <Arduino.h>
+#include "NewPing.h"
+#include <RrOpBase.hpp>
 
-// Set which profile to use.
-#if(DPLATFORM == UNO)
-// Pin layout for motor driver A
-#include <PinLayoutArduinoUno.h>
 
-#endif
+#define SOUND_SPEED_INGORE_TEMP 0.0343
 
-// IRQ pin
-// When HIGH indicates that there is data on available from PI
-#define RR_IRQ_MODE RISING
-#define ISR_TIMEOUT 500
-
-// Max Sensor range is define as 450 to 500 cm. Lets use around 4 meters to be safe
-#define MAX_DISTANCE 400
-
-// For Testing use I2C bus, or console will not work.
-// TODO: Add initlization command for BUS here.
-#if (BUSTYPE == I2C)
-#define BUS Wire
-#else
-#define BUS Serial
-#endif
+namespace rrfw {
+    class Hsr04 : public  RrOpBase {
+    public:
+        const RrOpStorage execute(const RrOpStorage  bytes) override;
+        Hsr04(int ping_pin, int max_distance),
+        sonar{};
+    
+    private:
+        int     _ping_pin;
+        NewPing *sonar;
+    };
+}
 
 #endif

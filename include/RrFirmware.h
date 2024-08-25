@@ -31,16 +31,17 @@
  * Commands
  *************************************************************/
 enum RR_CMD : uint8_t {
-    // Actions
-    RR_CMD_U1            =0x00,  /* command for Motor Driver A */
-    RR_CMD_U2            =0x01,  /* command for Motor Driver B */
-
     // Response codes.
-    RR_IO_RES_OK         =0x02,  /* successfully processed result, with return response */
-    RR_IO_RES_TIMEOUT    =0x03,  /* timed out while waiting to recieve data */
-    RR_IO_RES_ACTION_SENT=0x04,  /* Action was sent */
-    RR_IO_RES_UNSUPPORTED=0x05,  /* An unsupported operation.*/
-    RR_IO_RES_BAD_RQ     =0x06   /* Bad request was recieved */
+    RR_IO_RES_OK         =0x00,  /* successfully processed result, with return response */
+    RR_IO_RES_TIMEOUT    =0x01,  /* timed out while waiting to recieve data */
+    RR_IO_RES_ACTION_SENT=0x02,  /* Action was sent */
+    RR_IO_RES_UNSUPPORTED=0x03,  /* An unsupported operation.*/
+    RR_IO_RES_BAD_RQ     =0x04,   /* Bad request was recieved */
+
+    // Actions
+    RR_CMD_U1            =0x05,  /* command for Motor Driver A */
+    RR_CMD_U2            =0x06,  /* command for Motor Driver B */
+    RR_CMD_U4            =0x07,  /* Ultra sonic (HSR-04 compatible )*/
 };
 
 
