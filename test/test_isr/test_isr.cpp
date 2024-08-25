@@ -18,7 +18,6 @@ void setup()
     delay(2000);
 
     UNITY_BEGIN();
-    rrfw::setup_isr();
     RUN_TEST(test_isr_l298n);
     UNITY_END();
 }

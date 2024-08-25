@@ -25,40 +25,53 @@
 
 #include <rr_isr.hpp>
 
+SUPPORTED_CMD_INIT
+
 namespace rrfw {
-    static RrOpBase* io_functions[RR_IO_SZ];
-
-    /********************************************************************
-     * Register handlers for the commands, each handler should have its
-     * own constructor, which set hte arguments correly, or the profile
-     * will mark the command as unsupported.
-     * 
-     */
-    void setup_isr() {
-       io_functions[0] = M1_U1_CLASS;
-    }
-
-    /*******************************************************************
-     * Explicitly call the drivers deconsrtuctor, this is because we 
-     * are refercining the class therefore need to deconstruct.
-     */
-    void tear_down_isr()
+    
+    RrOpStorage io_cmds(const RrOpStorage rx) 
     {
-        for (auto i : io_functions) {
-            delete(i);
+        static RrOpBase    uc1 = M1_U1_CLASS;
+        static RrOpStorage usp = RrOpStorage(RR_IO_RES_UNSUPPORTED, 0, {});
+
+        // Execute the command according to the profile.
+        switch (rx._cmd) {
+            case RR_CMD_U1:
+                return uc1.execute(rx);
         }
+
+        // if the command can not be found return unsupported.
+        return usp;
     }
+
+    int compare(const void* a, const void* b)
+    {
+        return (*(uint8_t*)a - *(uint8_t*)b);
+    }
+
 
     /********************************************************************
      * Executes the ISR command that is given.
-     */
+     ********************************************************************/
     const RrOpStorage ctl_isr(const RrOpStorage bytes)
     {
-        // Look for an operational handler.
-        if (bytes._cmd <= RR_IO_SZ && bytes._sz >= 2) {
-            return io_functions[bytes._cmd]->execute(bytes);
+        // get static copies of the supported commands so that clock cycles are not waisted on 
+        // sorting array etc.
+        static size_t sz = sizeof(SUPPORTED_CMD) / sizeof(SUPPORTED_CMD[0]);
+        static uint8_t *supported_cmds = NULL;
+
+        if (supported_cmds == NULL) {
+            supported_cmds = (uint8_t *) calloc(sz, sizeof(uint8_t));
+            memcpy(supported_cmds, SUPPORTED_CMD, sz);
         }
-        uint8_t data[] = {};
-        return RrOpStorage(RR_IO_RES_UNSUPPORTED, 2, data);
+
+        qsort(&supported_cmds, sz, sizeof(uint8_t), compare);
+        uint8_t* item;
+        item = (uint8_t*) bsearch(&bytes._cmd, supported_cmds, sz, sizeof(uint8_t), compare);
+
+        if (item != NULL) {
+            return io_cmds(bytes);
+        }
+        return RrOpStorage(RR_IO_RES_UNSUPPORTED, 0, {});
     }
 }

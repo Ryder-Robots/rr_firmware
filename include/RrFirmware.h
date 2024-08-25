@@ -44,11 +44,6 @@ enum RR_CMD : uint8_t {
 };
 
 
-// CAVEAT MUST BE LAST FUNCTION
-#define RR_IO_SZ RR_CMD_U2
-
-
-
 // Arguments for motors
 // Constants specifc to MC1
 #define RR_MOTOR_FLAG_IN1 0b00000001  // Toggle IN1 HIGH

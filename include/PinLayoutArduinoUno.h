@@ -35,11 +35,11 @@
 #define M1_U1_IN3 7  // pin 13(L298N)
 #define M1_U1_IN4 6  // pin 15(L298N)
 
-#define M1_U1_CLASS new L298(M1_U1_ENA, M1_U1_ENB, M1_U1_IN1, M1_U1_IN2, M1_U1_IN3, M1_U1_IN4)
+#define M1_U1_CLASS L298(M1_U1_ENA, M1_U1_ENB, M1_U1_IN1, M1_U1_IN2, M1_U1_IN3, M1_U1_IN4)
 
 #define RR_IRQ_PIN  19
 
-// Suppoerted functions
-#define extern const uint8_t[] SUPPORTED_CMD = {}  
+// Add supported actions, and obvservations here,  DO NOT ADD supported responses.
+#define SUPPORTED_CMD_INIT extern const uint8_t SUPPORTED_CMD[] = {RR_CMD_U1};
 
 #endif

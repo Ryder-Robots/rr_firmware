@@ -28,24 +28,17 @@
 #ifndef RR_ISR_HPP
 #define RR_ISR_HPP
 
+#include <stdlib.h>
 #include <RrOpStorage.hpp>
 #include <RrFirmware.h>
 #include <RrOpBase.hpp>
 #include <PinLayout.h>
+#include <PinLayout.h>
 
 namespace rrfw {
 
-    void setup_isr();
-
-    // function that will called when PIN is rising.
-    // interupt service routine. This function will take over the USB bus, therefore it
-    // can't be unit tested.
-    void isr();
-
     // This functino is called by isr(), and designed specifically for unit testing.
     const  RrOpStorage  ctl_isr(const RrOpStorage bytes);
-
-    void tear_down_isr();
 
 }
 #endif
