@@ -33,12 +33,12 @@ namespace rrfw {
     class Hsr04 : public  RrOpBase {
     public:
         const RrOpStorage execute(const RrOpStorage  bytes) override;
-        Hsr04(int ping_pin, int max_distance),
-        sonar{};
+        Hsr04(int echo_pin, int trig_pin, int max_distance);
     
     private:
-        int     _ping_pin;
-        NewPing *sonar;
+        int      _echo_pin;
+        int      _trig_pin;
+        NewPing *_sonar;
     };
 }
 

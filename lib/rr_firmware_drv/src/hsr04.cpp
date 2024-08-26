@@ -27,15 +27,16 @@ namespace rrfw {
     /*******************************************************************************
      * allocate the pin pin.
      */
-    Hsr04::Hsr04(int ping_ping, int max_distance):
-        _ping_pin{ping_ping}
+    Hsr04::Hsr04(int echo_pin, int trig_pin, int max_distance):
+        _echo_pin{echo_pin},
+        _trig_pin{trig_pin}
     {
-        sonar = new NewPing(ping_ping, ping_ping, max_distance);
+        _sonar = new NewPing(trig_pin, echo_pin, max_distance);
     }
 
-     const RrOpStorage execute(const RrOpStorage  bytes)
+     const RrOpStorage Hsr04::execute(const RrOpStorage  bytes)
      {
-        float duration = sonar->ping();
+        float duration = _sonar->ping_cm();
 
         // Assumes and ambient temprature of 20 degrees celcius,  this will need to be 
         // turned in future versions.
@@ -44,8 +45,8 @@ namespace rrfw {
         if (round((duration / 2) * SOUND_SPEED_INGORE_TEMP) > 0) {
             distance = round((duration / 2) * SOUND_SPEED_INGORE_TEMP);
         }
-        uint8_t p1 = 0, p2 = 0;
 
+        return RrOpStorage(RR_IO_RES_OK, 0, {});
      }
 
 }
