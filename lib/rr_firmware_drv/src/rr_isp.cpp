@@ -32,12 +32,15 @@ namespace rrfw {
     RrOpStorage io_cmds(const RrOpStorage rx) 
     {
         static RrOpBase    uc1 = M1_U1_CLASS;
+        static RrOpBase    uc4 = M1_U4_CLASS;
         static RrOpStorage usp = RrOpStorage(RR_IO_RES_UNSUPPORTED, 0, {});
 
         // Execute the command according to the profile.
         switch (rx._cmd) {
             case RR_CMD_U1:
                 return uc1.execute(rx);
+            case RR_CMD_U4:
+                return uc4.execute(rx);
         }
 
         // if the command can not be found return unsupported.

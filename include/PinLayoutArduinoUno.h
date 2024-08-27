@@ -36,10 +36,12 @@
 #define M1_U1_IN3 6  // pin 13(L298N)
 #define M1_U1_IN4 7  // pin 15(L298N)
 
-#define M1_U4_TXRX 8 // Trig/Echo pin
+#define M1_U4_TRIG 8 // Trig/Echo pin
+#define M1_U4_ECHO 8 
+#define M1_U4_MAX_DISTANCE 400
 
 #define M1_U1_CLASS L298(M1_U1_ENA, M1_U1_ENB, M1_U1_IN1, M1_U1_IN2, M1_U1_IN3, M1_U1_IN4)
-#define M1_U4_CLASS Hsr04(M1_U4_TXRX);
+#define M1_U4_CLASS Hsr04(M1_U4_ECHO, M1_U4_TRIG, M1_U4_MAX_DISTANCE);
 
 #define RR_IRQ_PIN  2
 

@@ -1,7 +1,17 @@
 #include <Arduino.h>
 #include <unity.h>
+#include <stdlib.h>
 #include <rr_isr.hpp>
 
+void test_hsr04()
+{
+    rrfw::RrOpStorage tx = rrfw::RrOpStorage(RR_CMD_U4, 0, {});
+    rrfw::RrOpStorage res = rrfw::ctl_isr(tx);
+
+    int result = 0 | res._data[0] | res._data[1];
+    Serial.println(result);
+    TEST_ASSERT_EQUAL(1,1);
+}
 
 void test_isr_l298n() 
 {
@@ -19,6 +29,7 @@ void setup()
 
     UNITY_BEGIN();
     RUN_TEST(test_isr_l298n);
+    RUN_TEST(test_hsr04);
     UNITY_END();
 }
 

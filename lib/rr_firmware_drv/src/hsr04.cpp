@@ -36,17 +36,16 @@ namespace rrfw {
 
      const RrOpStorage Hsr04::execute(const RrOpStorage  bytes)
      {
-        float duration = _sonar->ping_cm();
+        float distance = _sonar->ping_cm();
 
-        // Assumes and ambient temprature of 20 degrees celcius,  this will need to be 
-        // turned in future versions.
-        uint16_t distance = 0;
-        
-        if (round((duration / 2) * SOUND_SPEED_INGORE_TEMP) > 0) {
-            distance = round((duration / 2) * SOUND_SPEED_INGORE_TEMP);
+        // technically this should not happen,  but lets assume it can.
+        if (distance < 0) {
+            distance = 0;
         }
+        uint16_t b1 = round(distance);
+        uint8_t data[] = {b1 >> 0x10, 1 >> 0x00};
 
-        return RrOpStorage(RR_IO_RES_OK, 0, {});
+        return RrOpStorage(RR_IO_RES_OK, 2, data);
      }
 
 }
