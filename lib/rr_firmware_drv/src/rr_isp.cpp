@@ -23,6 +23,7 @@
  * and operation or an action.
  */
 
+#include <PinLayout.h>
 #include <rr_isr.hpp>
 
 SUPPORTED_CMD_INIT

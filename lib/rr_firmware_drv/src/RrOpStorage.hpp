@@ -30,7 +30,7 @@ namespace rrfw {
 
     class RrOpStorage {
         public:
-            RrOpStorage(const RR_CMD cmd, const uint8_t sz, uint8_t *data):
+            RrOpStorage(const uint8_t cmd, const uint8_t sz, uint8_t *data):
             _cmd{cmd},
             _sz{sz}
             {

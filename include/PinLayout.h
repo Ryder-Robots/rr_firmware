@@ -23,10 +23,14 @@
 #include <Arduino.h>
 
 // Set which profile to use.
-#if(DPLATFORM == UNO)
+#ifdef PLATFORM_UNO
 // Pin layout for motor driver A
 #include <PinLayoutArduinoUno.h>
 
+#else
+#ifndef PLATFORM_NANO33BL
+#include <PinLayoutArduinoNano33Ble.h>
+#endif
 #endif
 
 // IRQ pin
